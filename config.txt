@@ -1,0 +1,6 @@
+infile=data.txt
+out_by_a=a.txt
+out_by_n=n.txt
+producer_threads_num=4
+consumer_threads_num=4
+block_size=100000
