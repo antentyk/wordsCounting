@@ -56,14 +56,16 @@ public:
     }
 
     void push_front(const T& val){
-        std::lock_guard<decltype(mutex_)> lck(getMutex());
+        std::unique_lock<decltype(mutex_)> lck(getMutex());
         deque_.push_front(val);
+		lck.unlock();
         getConditionVariable().notify_one();
     }
 
     void push_back(const T& val){
-        std::lock_guard<decltype(mutex_)> lck(getMutex());
+        std::unique_lock<decltype(mutex_)> lck(getMutex());
         deque_.push_back(val);
+		lck.unlock();
         getConditionVariable().notify_one();
     }
 private:

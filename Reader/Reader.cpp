@@ -37,13 +37,15 @@ void Reader::prepareBlock(shared_ptr<wordsList> block){
     if(block == nullptr)
         return;
     
+	block->reserve(blockSize);
+
     string word;
 
-    for
-    (
-        size_t left = blockSize;
-        left >= 1 && file >> word;
-        --left
-    )
-        block->push_back(word);
+	for
+	(
+		size_t left = blockSize;
+		left >= 1 && file >> word;
+		--left
+	)
+		block->push_back(word);
 }

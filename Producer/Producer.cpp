@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <mutex>
 #include <type_traits>
+#include <ctype.h>
 
 #include "Producer.h"
 
@@ -21,29 +22,36 @@ void Producer::removePunctuation(string &target){
         std::remove_if(
             target.begin(),
             target.end(),
-            [](char c){return !isalpha(c);}
-        )
+            [](unsigned char it){
+				return !(isalpha(it) || isdigit(it));
+			}
+        ),
+		target.end()
     );
 }
 
 shared_ptr<wordsDict> Producer::produce(shared_ptr<wordsList> lst){
     shared_ptr<wordsDict> result(new wordsDict());
 
-    for(auto &it: *lst)
-        ++result->operator[](it);
+	for (auto &it : *lst)
+	{
+		removePunctuation(it);
+		if (it == "")continue;
+		++result->operator[](it);
+	}
     
     return result;
 }
 
 void Producer::run(){
     while(true){
-        unique_lock<std::remove_reference<decltype(rawData.getMutex())>::type>
-            lck(rawData.getMutex());
+        unique_lock<std::recursive_mutex> lck(rawData.getMutex());
 
         while(rawData.empty())
             rawData.getConditionVariable().wait(lck);
         
         if(rawData.size() == 1 && rawData.back() == nullptr){
+			lck.unlock();
             rawData.getConditionVariable().notify_one();
             return;
         }
