@@ -47,5 +47,5 @@ void Reader::prepareBlock(shared_ptr<wordsList> block){
 		left >= 1 && file >> word;
 		--left
 	)
-		block->push_back(word);
+		block->push_back(std::move(word));
 }

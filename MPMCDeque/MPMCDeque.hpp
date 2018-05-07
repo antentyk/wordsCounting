@@ -25,21 +25,21 @@ public:
 
     const T& front() const{
         std::unique_lock<decltype(mutex_)> lck(mutex_);
-        while(empty())
+        while(deque_.empty())
             condition_variable_.wait(lck);
         return deque_.front();
     }
 
     const T& back() const{
         std::unique_lock<decltype(mutex_)> lck(mutex_);
-        while(empty())
+        while(deque_.empty())
             condition_variable_.wait(lck);
         return deque_.back();
     }
 
     T pop_front(){
         std::unique_lock<decltype(mutex_)> lck(getMutex());
-        while(empty())
+        while(deque_.empty())
             getConditionVariable().wait(lck);
         T result = deque_.front();
         deque_.pop_front();
@@ -48,7 +48,7 @@ public:
 
     T pop_back(){
         std::unique_lock<decltype(mutex_)> lck(getMutex());
-        while(empty())
+        while(deque_.empty())
             getConditionVariable().wait(lck);
         T result = deque_.back();
         deque_.pop_back();

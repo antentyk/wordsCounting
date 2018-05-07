@@ -7,8 +7,8 @@ SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g")
 SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
 
 SET(EXECUTABLE_NAME wordsCounting)
-SET(DIRS_LST Common Config Exceptions MPMCDeque Reader Producer)
-SET(FILES_LST main.cpp Common/Common.cpp Config/Config.cpp Reader/Reader.cpp Producer/Producer.cpp)
+SET(DIRS_LST Common Config Consumer Exceptions MPMCDeque Reader Producer)
+SET(FILES_LST main.cpp Common/Common.cpp Config/Config.cpp Consumer/Consumer.cpp Reader/Reader.cpp Producer/Producer.cpp)
 
 FIND_PACKAGE(Boost REQUIRED)
 FIND_PACKAGE(Threads REQUIRED)

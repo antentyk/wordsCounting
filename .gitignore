@@ -1,5 +1,7 @@
 .vscode/
 Debug/
 Release/
-wordsCounter*
+wordsCounting*
 ipch/
+a.txt
+n.txt
