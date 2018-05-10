@@ -18,5 +18,6 @@ const size_t
     kMaxConsumerThreadsNum{100};
 
 void displayHelp(){
-    cout << "Displaying help" << endl;
+    cout << "wordsCounting [-h | --help] config_file_name" << endl;
+    cout << "you should launch the program in the same directory where config file is located" << endl;
 }

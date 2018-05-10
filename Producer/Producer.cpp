@@ -36,7 +36,8 @@ shared_ptr<wordsDict> Producer::produce(shared_ptr<wordsList> lst){
 	for (auto &it : *lst)
 	{
 		removePunctuation(it);
-		if (it == "")continue;
+        std::transform(it.begin(), it.end(), it.begin(), ::tolower);
+		if (it.empty())continue;
 		++result->operator[](it);
 	}
     
